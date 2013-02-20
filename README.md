@@ -9,7 +9,7 @@ head.js のスクリプトローダーをrequire.js っぽく使うための拡�
 ## どこらへんをrequire.jsっぽくしたのか
 
 - script要素のdata-*属性でmain.jsを指定できる
-- main.js では require() でリソースをロード出来る
+- main.js では headRequire() でリソースをロード出来る
 - nodeベースの"なんちゃって"コンパイラが付属
 
 ## リソースローダー
@@ -26,7 +26,7 @@ main.js の中身は、例えば次のようになります。
 リソースのパスは、main.jsからの相対パスとなります。
 
 ```js
-require(
+headRequire(
 	"the/path/to/foojs",
 	"the/path/to/bar.js",
 	"the/path/to/baz.js"
@@ -34,7 +34,7 @@ require(
 );
 ```
 
-require.jsと違って、引数は配列ではありません。
+require.jsの`require()`と違って、引数は配列ではありません。
 また、最後の引数はコールバック関数ではありませんので、最後のソースに初期化の処理を書く必要があります。
 
 これはコンパイラで手抜きをする為です。ごめんなさい。
@@ -42,7 +42,7 @@ require.jsと違って、引数は配列ではありません。
 
 ## ソースの結合
 
-nodeで動くコンパイラを用意しましたが、かなり適当な作りなので期待してはいけません。
+nodeで動くコンパイラを用意しましたが、かなり適当な作りなのであまり期待してはいけません。
 
 ```bash
 $ ./bin/hrc main.js
@@ -57,13 +57,10 @@ $ ./bin/hrc main.js
 $ ./bin/hrc main.js dest.js
 ```
 
-
-
-
 ## おまけ機能 : appオブジェクト
 
-head-require.js を読んでおくと、グローバル空間に "app" オブジェクトが生まれ、アクセスすることができます。
-例えば "app" オブジェクトの "path" メンバは main.js が設置されているディレクトリへのパスを格納しています。
+head-require.js を読んでおくと、グローバル空間に `app` オブジェクトが生まれ、アクセスすることができます。
+例えば `app.path`は main.js が設置されているディレクトリへのパスを格納しています。
 
 ```js
 var myPath = app.path; // <= "scripts/"
@@ -97,18 +94,10 @@ var myPath = myapp.path;
 ```
 
 
+## 作者
 
+mach3
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+- [Website](http://www.mach3.jp)
+- [Blog](http://blog.mach3.jp)
+- [Twitter](http://twitter.com/mach3ss)
