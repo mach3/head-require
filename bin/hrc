@@ -1,0 +1,77 @@
+#!/usr/bin/env node
+
+var fs = require("fs");
+var args = process.argv.slice(2);
+
+var HeadRequireCompiler = {
+
+	target : null,
+	path : null,
+	files : [],
+	data : [],
+
+	option : {
+		delimiter : ";",
+		encoding : "utf-8"
+	},
+
+	init : function(target){
+		this.target = target;
+		this.path = target.replace(/[^\/]+?$/, "");
+		return this;
+	},
+
+	compile : function(){
+		this.parseMain();
+		this.loadFiles();
+		return this.data.join(this.option.delimiter);
+	},
+
+	parseMain : function(){
+		var main, m;
+
+		main = fs.readFileSync(this.target, this.option.encoding);
+		m = main.match(/headRequire\(([\s\S]+?)\)/);
+		if(m){
+			this.files = JSON.parse("[" + m[1] + "]");
+		}
+		return this;
+	},
+
+	loadFiles : function(){
+		var self = this;
+
+		this.files.forEach(function(value, index){
+			var content = fs.readFileSync(self.path + value, self.option.encoding);
+			self.data.push(content);
+		});
+		return this;
+	}
+
+};
+
+(function(){
+
+	var hrc = HeadRequireCompiler;
+
+	try {
+		if(! args.length){
+			throw new Error("No arguments");
+		}
+
+		hrc.init(args[0]);
+
+		if(args.length > 1){
+			fs.writeFileSync(args[1], hrc.compile(), hrc.option.encoding);
+		} else {
+			console.log(hrc.compile());
+		}
+
+	} catch(e){
+		console.error(e.message);
+	}
+
+}());
+
+
+
