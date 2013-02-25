@@ -55,6 +55,7 @@
 		 */
 		set : function(key, value){
 			this.vars[key] = value;
+			return this.get(key);
 		},
 
 		/**
