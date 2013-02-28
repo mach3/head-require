@@ -11,6 +11,7 @@ head.js のスクリプトローダーをrequire.js っぽく使うための拡�
 - script要素のdata-*属性でmain.jsを指定できる
 - main.js では headRequire() でリソースをロード出来る
 - nodeベースの"なんちゃって"コンパイラが付属
+- ついでにgruntタスクを付けてみました
 
 ## リソースローダー
 
@@ -56,6 +57,28 @@ $ ./bin/hrc main.js
 ```bash
 $ ./bin/hrc main.js dest.js
 ```
+
+## Gruntタスク
+
+ソースを結合するgruntタスクを用意しました。
+下の例は、*dest.js*に*main.js*の結合結果を保存します。
+
+```javascript
+module.exports = function(grunt){
+	
+	grunt.loadTasks("the/path/to/head-require/tasks");
+
+	grunt.initConfig({
+		headRequire : {
+			dist : {
+				"the/path/to/dest.js" : "the/path/to/main.js"
+			}
+		}
+	});
+};
+```
+
+
 
 ## おまけ機能 : appオブジェクト
 
