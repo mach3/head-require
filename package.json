@@ -1,0 +1,20 @@
+{
+  "name": "head-require",
+  "version": "1.0.0",
+  "description": "Use head.js's script loader like require.js",
+  "main": "tasks/head-require.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mach3/head-require"
+  },
+  "keywords": [
+    "head.js",
+    "require.js"
+  ],
+  "author": "mach3",
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}
