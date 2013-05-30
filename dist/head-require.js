@@ -3,11 +3,11 @@
  * --------------
  * Copyright (C) 2013 Matsukaze.
  *
- * @version 1.0.0
+ * @version 1.1.0
  * @author mach3
  * @require head.js <http://headjs.com>
  *
- */(function(){
+ */(function(global){
 
 	/**
 	 * Loader Object
@@ -98,11 +98,11 @@
 
 	};
 
-	window[loader.namespace] = app;
-	window.headRequire = function(){
+	global[loader.namespace] = app;
+	global.headRequire = function(){
 		loader.require.apply(loader, arguments);
 	};
 
 	head.js(loader.main);
 
-}());
+}(this));
