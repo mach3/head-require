@@ -1,2 +1,2 @@
 
-myapp.set("foo", "bar");
+myapp.set("foo", "foofoo");

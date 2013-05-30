@@ -1,0 +1,4 @@
+
+myapp.set({
+	"bar" : "barbar"
+});

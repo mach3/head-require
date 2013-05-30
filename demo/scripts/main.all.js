@@ -1,0 +1,2 @@
+/* demo */
+myapp.set("foo","foofoo"),myapp.set({bar:"barbar"}),myapp.set("baz",function(){return"bazbaz"}),console.log("foofoo"===myapp.get("foo"),"barbar"===myapp.get("bar"),"bazbaz"===myapp.get("baz")(),"./scripts/"===myapp.path);

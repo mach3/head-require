@@ -1,10 +1,14 @@
-(function(){
+(function(global){
 
-	var app = ({
+	/**
+	 * Loader Object
+	 * -------------
+	 */
+	var loader = ({
 
 		node : null, // self node
 		main : null, // main script in data-main
-		appName : null, // the name of this object in data-namespace
+		namespace : null, // the name of namespace
 		path : null, // the path of main script
 
 		vars : {},
@@ -15,13 +19,13 @@
 				return nodes[nodes.length - 1];
 			}());
 			this.main = this.node.getAttribute("data-main");
-			this.appName = this.node.getAttribute("data-appname") || "app";
+			this.namespace = this.node.getAttribute("data-appname") || "app";
 			this.path = this.main.split("?")[0].replace(/[^\/]*?$/, "");
 			return this;
 		},
 
 		/**
-		 * require resources, and run callback
+		 * require resources 
 		 *
 		 * @example
 		 *   require("foo.js", "bar.js", "baz.js", ...);
@@ -34,34 +38,62 @@
 				deps[i] = this.path + deps[i];
 			}
 			head.js.apply(head, deps);
-		},
-
-		/**
-		 * Set value to this.vars
-		 * 
-		 * @param String key
-		 * @param Mixed value
-		 */
-		set : function(key, value){
-			this.vars[key] = value;
-			return this.get(key);
-		},
-
-		/**
-		 * Return value from this.vars
-		 *
-		 * @param String key
-		 */
-		get : function(key){
-			return this.vars[key];
 		}
 
 	}).init();
-	
-	window[app.appName] = app;
-	window.headRequire = function(){
-		app.require.apply(app, arguments);
+
+	/**
+	 * App object
+	 * ----------
+	 */
+	var app = {
+
+		path : loader.path,
+		options : {},
+
+		/**
+		 * Set value to options
+		 * `prop` is property name of options object ("options" as default)
+		 * 
+		 * @param String|Object key
+		 * @param Mixed value (optional)
+		 * @param String prop (optional)
+		 */
+		set : function(key, value, prop){
+			var i, data;
+
+			prop = prop || "options";
+			if(key instanceof String || typeof key === "string"){
+				this[prop][key] = value;
+			} else {
+				data = key;
+				for(i in data){
+					if(! data.hasOwnProperty(i)) continue;
+					this.set(i, data[i]);
+				}
+			}
+		},
+
+		/**
+		 * Get value from options
+		 *
+		 * @param String key
+		 * @param String prop
+		 */
+		get : function(key, prop){
+			prop = prop || "options";
+			if(this[prop].hasOwnProperty(key)){
+				return this[prop][key];
+			}
+		}
+
 	};
 
-	head.js(app.main);
-}());
+	global[loader.namespace] = app;
+	global.headRequire = function(){
+		loader.require.apply(loader, arguments);
+	};
+
+	head.js(loader.main);
+
+}(this));

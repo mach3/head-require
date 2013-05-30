@@ -1,32 +1,37 @@
 
-# HeadRequire.js version 1.0.0
+# HeadRequire.js
+
+Extension for head.js to use resource loader like require.js
+
+## Feature
+
+- Set main.js in script element's data-main attribute
+- Use `headRequire()` to load resource
+- Having grunt task to compile
 
 
-## これはなに
+## Resource Loader
 
-head.js のスクリプトローダーをrequire.js っぽく使うための拡張機能です。
+### Install
 
-## どこらへんをrequire.jsっぽくしたのか
+```
+$ bower install head-require
+```
 
-- script要素のdata-*属性でmain.jsを指定できる
-- main.js では headRequire() でリソースをロード出来る
-- nodeベースの"なんちゃって"コンパイラが付属
-- ついでにgruntタスクを付けてみました
 
-## リソースローダー
+### Usage
 
 ```html
 <script src="scripts/head.js"></script>
 <script src="scripts/head-require.js" data-main="scripts/main.js"></script>
 ```
 
-まず、head.jsを読み込んでからhead-require.jsを読み込みます。
-head-require.js のscript要素に data-main 属性を指定しておくと、そのスクリプトを読みこんでくれます。
+If you set `data-main` attribute in script element of "head-require.js",
+this automatically load that script.
 
-main.js の中身は、例えば次のようになります。
-リソースのパスは、main.jsからの相対パスとなります。
+For instance, write your main.js like below :
 
-```js
+```javascript
 headRequire(
 	"the/path/to/foojs",
 	"the/path/to/bar.js",
@@ -35,89 +40,98 @@ headRequire(
 );
 ```
 
-require.jsの`require()`と違って、引数は配列ではありません。
-また、最後の引数はコールバック関数ではありませんので、最後のソースに初期化の処理を書く必要があります。
+The paths of resources is relative from "main.js".
 
-これはコンパイラで手抜きをする為です。ごめんなさい。
+In head.js, the last argument can be callback function, 
+but `headRequire` doesn't deal with function,
+then you have to initialize in script loaded in the last argument.
+
+(Some day, I may complete this feature in future version)
 
 
-## ソースの結合
+## Grunt Task To Compile
 
-nodeで動くコンパイラを用意しましたが、かなり適当な作りなのであまり期待してはいけません。
-
-```bash
-$ ./bin/hrc main.js
-```
-
-これで、main.js 内でrequire()されているリソースが一塊になって文字列で通常出力されます。
-結合する際、区切り文字として ";" が付加されます。
-
-また、第二引数に出力先のファイルを指定できます。
+### Install
 
 ```bash
-$ ./bin/hrc main.js dest.js
+$ npm install head-require
 ```
 
-## Gruntタスク
+### Configure Example
 
-ソースを結合するgruntタスクを用意しました。
-下の例は、*dest.js*に*main.js*の結合結果を保存します。
+This will save the compiled result of "the/path/to/src/main.js" to "the/path/to/dest/main.js".
 
-```javascript
+```
 module.exports = function(grunt){
-	
-	grunt.loadTasks("the/path/to/head-require/tasks");
-
+	grunt.loadNpmTasks("head-require");
 	grunt.initConfig({
-		headRequire : {
-			dist : {
-				"the/path/to/dest.js" : "the/path/to/main.js"
+		dist : {
+			options : {
+				uglify : true,
+				splitBanners : true,
+				banner : "/* my script */\n"
+			},
+			files : {
+				"the/path/to/dest/main.js" : "the/path/to/src/main.js"
 			}
 		}
 	});
 };
 ```
 
+- *Caution* : This interface is changed at version 1.1.0
+- *Caution* : Values in files object must not be array, but string
+
+### Options
+
+- uglify : Boolean (false) - Minify by uglify.js or not
+- splitBanners : Boolean (false) - Add comment banner or not
+- banner : String ("") - Banner string
 
 
-## おまけ機能 : appオブジェクト
+## "app" Object
 
-head-require.js を読んでおくと、グローバル空間に `app` オブジェクトが生まれ、アクセスすることができます。
-例えば `app.path`は main.js が設置されているディレクトリへのパスを格納しています。
+head-require.js create `app` object as a member of global object.
 
-```js
-var myPath = app.path; // <= "scripts/"
+### Properties
+
+- path : String - The path to main.js
+- options : Object ({}) - container for set() and get()
+
+```
+var jsPath = app.path; // "scripts/"
 ```
 
-### 値の保存・取得
+### Methods
 
-値を共有する機能をつけました。好きなように使ってください。
+- set(name:String , value:Mixed) : void - Setter for options
+- get(name:String) : Mixed - Getter for options
 
-```js
-// セッター
+```
 app.set("foo", "bar");
+// or pass object
+app.set({foo : "bar"});
 
-// ゲッター
-console.log(app.get("foo")); // <= "bar"
+app.get("foo"); // "bar"
 ```
 
+### Change `app`'s Name
 
-### 名前の変更
+To change the name of `app`, set "data-appname" attribute in script element.
 
-尚、"app" という名前を変更したい場合は、script要素のdata-appname属性に指定すれば変更できます。
-
-```html
-<script src="scripts/head-require.js" data-main="scripts/main.js" data-appname="myapp"></script>
+```
+<script src="script/head-require.js" data-main="script/main.js" data-appname="myapp"></script>
 ```
 
-そうすることで、"app" が "myapp" として宣言されます。
+Then you can refer to app object as `myapp` in global.
 
-```javascript
-var myPath = myapp.path;
+```
+myapp.set("foo", "bar");
 ```
 
+-----
 
-## 作者
+## Author
 
 mach3
 

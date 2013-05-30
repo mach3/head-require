@@ -1,34 +1,49 @@
-
-
-var fs = require("fs");
-
-
-
-
 module.exports = function(grunt){
 
+	grunt.loadNpmTasks("grunt-contrib-uglify");
+	grunt.loadNpmTasks("grunt-contrib-concat");
+	grunt.loadTasks("tasks");
+
+	var pkg = grunt.file.readJSON("package.json");
+	var options = {
+		splitBanners : true,
+		banner : grunt.file.read("src/banner.js").replace("{{version}}", pkg.version)
+	};
 
 	grunt.initConfig({
 
-		meta : {
-			banner : fs.readFileSync("./src/banner.js", "utf-8")
-		},
-
 		concat : {
+			options : options,
 			dist : {
-				src : ["<banner>", "./src/head-require.js"],
-				dest : "./dist/head-require.js"
+				files : {
+					"./dist/head-require.js" : "./src/head-require.js"
+				}
 			}
 		},
 
-		min : {
+		uglify : {
+			options : options,
 			dist : {
-				src : ["<banner>", "./src/head-require.js"],
-				dest : "./dist/head-require.min.js"
+				files : {
+					"./dist/head-require.min.js" : "./src/head-require.js"
+				}
+			}
+		},
+
+		headRequire : {
+			demo : {
+				options : {
+					uglify : true,
+					splitBanners : true,
+					banner : "/* demo */\n"
+				},
+				files : {
+					"demo/scripts/main.all.js" : "demo/scripts/main.js"
+				}
 			}
 		}
 	});
 
-	grunt.registerTask("default", "concat min");
+	grunt.registerTask("default", ["concat", "uglify"]);
 
 };
