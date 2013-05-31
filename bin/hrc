@@ -1,77 +1,20 @@
 #!/usr/bin/env node
 
-var fs = require("fs");
-var args = process.argv.slice(2);
+var fs = require("fs"),
+	hrc = require("../lib/head-require"),
+	args = process.argv.slice(2),
+	result = null;
 
-var HeadRequireCompiler = {
+try {
+	if(args.length){
+		result = hrc.compile(args[0]);
 
-	target : null,
-	path : null,
-	files : [],
-	data : [],
-
-	option : {
-		delimiter : ";",
-		encoding : "utf-8"
-	},
-
-	init : function(target){
-		this.target = target;
-		this.path = target.replace(/[^\/]+?$/, "");
-		return this;
-	},
-
-	compile : function(){
-		this.parseMain();
-		this.loadFiles();
-		return this.data.join(this.option.delimiter);
-	},
-
-	parseMain : function(){
-		var main, m;
-
-		main = fs.readFileSync(this.target, this.option.encoding);
-		m = main.match(/headRequire\(([\s\S]+?)\)/);
-		if(m){
-			this.files = JSON.parse("[" + m[1] + "]");
-		}
-		return this;
-	},
-
-	loadFiles : function(){
-		var self = this;
-
-		this.files.forEach(function(value, index){
-			var content = fs.readFileSync(self.path + value, self.option.encoding);
-			self.data.push(content);
-		});
-		return this;
-	}
-
-};
-
-(function(){
-
-	var hrc = HeadRequireCompiler;
-
-	try {
-		if(! args.length){
-			throw new Error("No arguments");
-		}
-
-		hrc.init(args[0]);
-
-		if(args.length > 1){
-			fs.writeFileSync(args[1], hrc.compile(), hrc.option.encoding);
+		if(args[1]){
+			fs.writeFileSync(args[1], result);
 		} else {
-			console.log(hrc.compile());
+			console.log(result);
 		}
-
-	} catch(e){
-		console.error(e.message);
 	}
-
-}());
-
-
-
+} catch(e){
+	console.error(e.mssage);
+}

@@ -1,10 +1,12 @@
 (function(global){
 
+	var loader, app;
+
 	/**
 	 * Loader Object
 	 * -------------
 	 */
-	var loader = ({
+	loader = ({
 
 		node : null, // self node
 		main : null, // main script in data-main
@@ -46,7 +48,7 @@
 	 * App object
 	 * ----------
 	 */
-	var app = {
+	app = {
 
 		path : loader.path,
 		options : {},
@@ -68,8 +70,9 @@
 			} else {
 				data = key;
 				for(i in data){
-					if(! data.hasOwnProperty(i)) continue;
-					this.set(i, data[i]);
+					if(data.hasOwnProperty(i)){
+						this.set(i, data[i]);
+					}
 				}
 			}
 		},

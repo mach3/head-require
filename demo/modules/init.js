@@ -1,7 +1,11 @@
+(function(){
 
-console.log(
-	myapp.get("foo") === "foofoo",
-	myapp.get("bar") === "barbar",
-	myapp.get("baz")() === "bazbaz",
-	myapp.path === "./scripts/"
-);
+	var log = document.getElementById("log");
+	log.innerHTML = [
+		myapp.get("foo"),
+		myapp.get("bar"),
+		myapp.get("baz")()
+	].join("\n");
+
+}());
+

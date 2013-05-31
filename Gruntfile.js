@@ -35,7 +35,7 @@ module.exports = function(grunt){
 				options : {
 					uglify : true,
 					splitBanners : true,
-					banner : "/* demo */\n"
+					banner : "/* updated : <%= grunt.template.today('yyyy-mm-dd') %> */\n"
 				},
 				files : {
 					"demo/scripts/main.all.js" : "demo/scripts/main.js"

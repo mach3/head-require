@@ -7,3 +7,4 @@
 - Update grunt task to get options ("uglify", "splitBanners", "banner")
 - Change grunt task's interface to use "files"
 - Update README
+

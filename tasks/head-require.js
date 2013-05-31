@@ -12,8 +12,7 @@ grunt.initConfig({
 		dist : {
 			options : {
 				uglify : true,
-				splitBanners : true,
-				banenr : ""
+				banner : ""
 			},
 			files : {
 				"the/path/to/dest.js" : "the/path/to/main.js"
@@ -26,60 +25,45 @@ grunt.initConfig({
 
 module.exports = function(grunt){
 
-	grunt.registerMultiTask("headRequire", "HeadRequire.js's compiler", function(){
+ 	grunt.registerMultiTask("headRequire", "head-require.js's compiler", function(){
 
-		var options, uglify, getFiles, loadSource, dest, source;
+ 		var my = {
 
-		uglify = require("uglify-js");
-		options = this.options({
-			uglify : false,
-			splitBanners : false,
-			banner : ""
-		});
+ 			uglify : require("uglify-js"),
+ 			hrc : require("../lib/head-require"),
+ 			options : this.options({
+ 				uglify : false,
+ 				banner : ""
+ 			}),
 
-		getFiles = function(name){
-			var path, files, content, headRequire, funcs;
+ 			init : function(files){
+ 				var banner;
 
-			path = name.replace(/[^\/]*?$/, "");
-			files = [];
-			headRequire = function(){
-				Array.prototype.forEach.call(arguments, function(value){
-					files.push(path + value);
-				});
-			};
-			content = grunt.file.read(name)
-				.replace(/\/\/[\s\S]+?\n/g, "")
-				.replace(/\/\*[\s\S]+?\*\//g, "")
-				.replace(/\s/g, "");
-			funcs = content.match(/headRequire\(([\s\S]+?)\)/g);
-			if(funcs){
-				funcs.forEach(function(func){
-					eval(func);
-				});
-			}
-			return files;
-		};
+ 				banner = grunt.template.process(my.options.banner);
+ 				grunt.util._.forEach(files, function(src, dest){
+ 					var content;
 
-		loadSource = function(files){
-			var source = "";
+ 					try {
+	 					content = my.hrc.compile(src);
+ 						grunt.file.write(dest, content);
 
-			files.forEach(function(name, index){
-				source += grunt.file.read(name) + ";";
-			});
-			return source;
-		};
+	 					if(my.options.uglify){
+	 						content = my.uglify.minify(dest).code;
+	 						grunt.file.write(dest, content);
+	 					}
+	 					if(banner){
+	 						content = banner + content;
+	 						grunt.file.write(dest, content);
+	 					}
+	 					grunt.log.writeln("Compiled : " + dest + " < " + src);
 
-		for(dest in this.data.files){
-			source = loadSource(getFiles(this.data.files[dest]));
-			grunt.file.write(dest, source);
-			if(options.uglify){
-				source = uglify.minify(dest).code;
-				grunt.file.write(dest, source);
-			}
-			if(options.splitBanners){
-				grunt.file.write(dest, options.banner + source);
-			}
-		}
-	});
+ 					} catch(e){
+ 						grunt.log.error(e.message);
+ 					}
+ 				});
+ 			}
+ 		};
 
+ 		my.init(this.data.files);
+ 	});
 };

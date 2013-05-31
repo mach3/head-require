@@ -1,2 +1,2 @@
-/* demo */
-myapp.set("foo","foofoo"),myapp.set({bar:"barbar"}),myapp.set("baz",function(){return"bazbaz"}),console.log("foofoo"===myapp.get("foo"),"barbar"===myapp.get("bar"),"bazbaz"===myapp.get("baz")(),"./scripts/"===myapp.path);
+/* updated : 2013-05-31 */
+myapp.set("foo","foofoo"),myapp.set({bar:"barbar"}),myapp.set("baz",function(){return"bazbaz"}),function(){var a=document.getElementById("log");a.innerHTML=[myapp.get("foo"),myapp.get("bar"),myapp.get("baz")()].join("\n")}();
