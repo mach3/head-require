@@ -1,6 +1,12 @@
 
 # ChangeLog
 
+## 1.2.0 (2013-05-31)
+
+- Add lib/head-require.js as compiler library
+- Rewrite task to use library
+- Add bin/hrc as command line compiler
+
 ## 1.1.0 (2013-05-30)
 
 - Separate loader and app object

@@ -48,6 +48,10 @@ grunt.initConfig({
 
 &raquo; [Learn more about Grunt task](doc/grunt-task.md)
 
+### CHANGE LOG
+
+&raquo; [Change Log](doc/changelog.md)
+
 -----
 
 ## Author
