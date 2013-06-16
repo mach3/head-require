@@ -103,7 +103,7 @@
 	};
 
 	global[loader.namespace] = app;
-	global.headRequire = function(){
+	global.headRequire = head.require = function(){
 		loader.require.apply(loader, arguments);
 	};
 

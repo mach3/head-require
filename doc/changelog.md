@@ -1,6 +1,10 @@
 
 # ChangeLog
 
+## latest 
+
+- Add `head.require` method ( = headRequire)
+
 ## 1.2.0 (2013-05-31)
 
 - Add lib/head-require.js as compiler library

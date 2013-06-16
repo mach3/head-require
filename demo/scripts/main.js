@@ -1,4 +1,4 @@
-headRequire(
+head.require(
 	"../modules/foo.js", // comment
 	"../modules/bar.js",
 	// "../modules/hoge.js",
