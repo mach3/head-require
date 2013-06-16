@@ -1,7 +1,7 @@
 
 # ChangeLog
 
-## latest 
+## 1.2.1 (2013-06-16)
 
 - Add `head.require` method ( = headRequire)
 

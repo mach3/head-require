@@ -1,6 +1,6 @@
 {
   "name": "head-require",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Use head.js's script loader like require.js",
   "main": ["lib/head-require.js", "tasks/head-require.js"],
   "scripts": {
