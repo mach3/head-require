@@ -1,11 +1,8 @@
-(function(){
+var log = function(str){
+	var node = document.getElementById("log");
+	node.innerText += str + "\n";
+};
 
-	var log = document.getElementById("log");
-	log.innerHTML = [
-		myapp.get("foo"),
-		myapp.get("bar"),
-		myapp.get("baz")()
-	].join("\n");
-
-}());
-
+log("Foo: " + (myapp.foo instanceof myapp.lib.Foo).toString());
+log("Bar: " + (myapp.bar instanceof myapp.lib.Bar).toString());
+log("Baz: " + (myapp.baz instanceof myapp.lib.Baz).toString());

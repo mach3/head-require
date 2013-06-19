@@ -1,4 +1,0 @@
-
-myapp.set({
-	"bar" : "barbar"
-});

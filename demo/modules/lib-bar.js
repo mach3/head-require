@@ -1,0 +1,2 @@
+myapp.lib.Bar = function(){
+};

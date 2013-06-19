@@ -1,2 +1,0 @@
-/* updated : 2013-06-16 */
-myapp.set("foo","foofoo"),myapp.set({bar:"barbar"}),myapp.set("baz",function(){return"bazbaz"}),function(){var a=document.getElementById("log");a.innerHTML=[myapp.get("foo"),myapp.get("bar"),myapp.get("baz")()].join("\n")}();

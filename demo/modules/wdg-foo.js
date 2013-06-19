@@ -1,0 +1,1 @@
+myapp.foo = new myapp.lib.Foo();

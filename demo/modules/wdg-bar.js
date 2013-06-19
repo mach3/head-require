@@ -1,0 +1,1 @@
+myapp.bar = new myapp.lib.Bar();

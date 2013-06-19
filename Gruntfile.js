@@ -38,7 +38,8 @@ module.exports = function(grunt){
 					banner : "/* updated : <%= grunt.template.today('yyyy-mm-dd') %> */\n"
 				},
 				files : {
-					"demo/scripts/main.all.js" : "demo/scripts/main.js"
+					"demo/scripts/lib.combined.js" : "demo/scripts/lib.js",
+					"demo/scripts/main.combined.js" : "demo/scripts/main.js"
 				}
 			}
 		}

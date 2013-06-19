@@ -1,6 +1,12 @@
 
 # ChangeLog
 
+## latest
+
+- Rewrite loader and app
+- Add `lib` property to app
+- Enable to load multiple main.js
+
 ## 1.2.1 (2013-06-16)
 
 - Add `head.require` method ( = headRequire)

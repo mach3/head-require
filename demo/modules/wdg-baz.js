@@ -1,0 +1,1 @@
+myapp.baz = new myapp.lib.Baz();

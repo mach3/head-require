@@ -1,7 +1,7 @@
 head.require(
-	"../modules/foo.js", // comment
-	"../modules/bar.js",
+	"../modules/wdg-foo.js", // comment
+	"../modules/wdg-bar.js",
 	// "../modules/hoge.js",
-	"../modules/baz.js", /* comment */
+	"../modules/wdg-baz.js", /* comment */
 	"../modules/init.js"
 );

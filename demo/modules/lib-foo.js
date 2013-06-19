@@ -1,0 +1,2 @@
+myapp.lib.Foo = function(){
+};
