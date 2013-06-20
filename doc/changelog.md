@@ -1,7 +1,7 @@
 
 # ChangeLog
 
-## latest
+## 1.3.0 (2013-06-20)
 
 - Rewrite loader and app
 - Add `lib` property to app
