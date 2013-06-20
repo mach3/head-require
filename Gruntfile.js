@@ -7,7 +7,7 @@ module.exports = function(grunt){
 	var pkg = grunt.file.readJSON("package.json");
 	var options = {
 		splitBanners : true,
-		banner : grunt.file.read("src/banner.js").replace("{{version}}", pkg.version)
+		banner : grunt.template.process(grunt.file.read("src/banner.js"), {data:pkg})
 	};
 
 	grunt.initConfig({

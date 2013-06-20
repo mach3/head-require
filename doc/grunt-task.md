@@ -29,7 +29,7 @@ module.exports = function(grunt){
 ```
 
 `headRequire` task compiles "main.js" to "dest.js".
-Concretely, all scripts passed to `headRequire()` method in "main.js" are to be just combined with ";",
+Concretely, all scripts passed to `head.require()` method in "main.js" are to be just combined with ";",
 and the result is to be saved as "dest.js".
 
 Then, run it.

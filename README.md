@@ -6,7 +6,8 @@ Extension for head.js to use resource loader like require.js
 ## Feature
 
 - Set main.js in script element's data-main attribute
-- Use `headRequire()` to load resources
+- Multiple main.js available now
+- Use `head.require()` to load resources
 - Grunt task to compile them to a file
 
 
@@ -21,15 +22,15 @@ Extension for head.js to use resource loader like require.js
 "scripts/main.js" like this : 
 
 ```javascript
-headRequire(
+head.require(
 	"the/path/to/foojs",
 	"the/path/to/bar.js",
 	"the/path/to/baz.js"
 	"the/path/to/initialize.js"
 );
 ```
-
 &raquo; [Learn more about head-require.js](doc/head-require.md)
+
 
 ### Grunt Task to Compile
 
