@@ -1,6 +1,16 @@
 (function(global, doc){
 
-	var app, loader;
+	var app, loader, head;
+
+	/**
+	 * detect "head" name
+	 */
+	head = (function(){
+		if(global.head_conf && global.head_conf.head){
+			return global[global.head_conf.head];
+		}
+		return global.head;
+	}());
 
 	/**
 	 * app object
@@ -139,7 +149,7 @@
 		}
 	};
 
-	head.require = headRequire = function(){
+	head.require = function(){
 		loader.require.apply(loader, arguments);
 	};
 

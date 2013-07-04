@@ -1,20 +1,45 @@
 #!/usr/bin/env node
 
 var fs = require("fs"),
+	opts = require("opts"),
 	hrc = require("../lib/head-require"),
-	args = process.argv.slice(2),
+	options = null,
 	result = null;
 
-try {
-	if(args.length){
-		result = hrc.compile(args[0]);
 
-		if(args[1]){
-			fs.writeFileSync(args[1], result);
-		} else {
-			console.log(result);
-		}
+options = [
+	{
+		short: "n",
+		long: "name",
+		descripton: "`head` object's name (if you renamed)",
+		value: true
+	},
+	{
+		short: "o",
+		long: "out",
+		description: "output path",
+		value: true
 	}
+];
+
+arguments = [
+	{ name: "source", required: true }
+];
+
+opts.parse(options, arguments, true);
+
+
+try {
+	if(opts.get("name")){
+		hrc.config({ head: opts.get("name")});
+	}
+	result = hrc.compile(opts.arg("source"));
+	if(opts.get("out")){
+		fs.writeFileSync(opts.get("out"), result);
+	} else {
+		console.log(result);
+	}
+
 } catch(e){
-	console.error(e.mssage);
+	console.error(e.message);
 }

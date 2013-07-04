@@ -34,8 +34,8 @@ module.exports = function(grunt){
 			demo : {
 				options : {
 					uglify : true,
-					splitBanners : true,
-					banner : "/* updated : <%= grunt.template.today('yyyy-mm-dd') %> */\n"
+					banner : "/* updated : <%= grunt.template.today('yyyy-mm-dd') %> */\n",
+					head : "_head_"
 				},
 				files : {
 					"demo/scripts/lib.combined.js" : "demo/scripts/lib.js",

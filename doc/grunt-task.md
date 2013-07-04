@@ -48,3 +48,4 @@ $ grunt headRequire:dist
 
 - uglify : Boolean (false) - Minify with uglify.js or not
 - banner : String ("") - Banner string to be prepended to the compiled result
+- head : String ("head") - `head` object's name (if you renamed it)

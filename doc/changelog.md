@@ -1,6 +1,13 @@
 
 # ChangeLog
 
+## 1.4.0 (2013-07-05)
+
+- Remove `window.headRequire` method on browser (!!!)
+- Deal with renamed head object (by window.head_conf)
+- Add `head` option on Grunt task (for renamed head object)
+- Update bin/hrc powered by `js-opts`
+
 ## 1.3.0 (2013-06-20)
 
 - Rewrite loader and app

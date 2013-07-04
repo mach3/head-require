@@ -11,8 +11,9 @@ grunt.initConfig({
 	headRequire : {
 		dist : {
 			options : {
-				uglify : true,
-				banner : ""
+				uglify : true, // uglify or not
+				banner : "", // comment banner string
+				head : "head" // name of `head` object
 			},
 			files : {
 				"the/path/to/dest.js" : "the/path/to/main.js"
@@ -33,12 +34,14 @@ module.exports = function(grunt){
  			hrc : require("../lib/head-require"),
  			options : this.options({
  				uglify : false,
- 				banner : ""
+ 				banner : "",
+ 				head : "head"
  			}),
 
  			init : function(files){
  				var banner;
 
+ 				my.hrc.config(my.options);
  				banner = grunt.template.process(my.options.banner);
  				grunt.util._.forEach(files, function(src, dest){
  					var content;
