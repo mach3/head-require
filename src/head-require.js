@@ -20,42 +20,39 @@
 		 * Attributes: 
 		 * - path:String => Path to main.js
 		 * - lib:Object => Container for libraries
-		 * - options:Object => Container for options
+		 * - attributes:Object => Container for variables
 		 */
-		path : null,
-		lib : {},
-		options : {},
+		path: null,
+		lib: {},
+		attributes: {},
 
 		/**
 		 * Set option by key (from named prop)
-		 * @param String key
+		 * @param String key | Object vars
 		 * @param Mixed value
-		 * @param String prop (optional)
 		 */
-		set : function(key, value, prop){
-			var i, data;
-			prop = prop || "options";
+		set: function(key, value){
+			var i, vars;
 			if(key instanceof String || typeof key === "string"){
-				this[prop][key] = value;
-				return;
-			}
-			data = key;
-			for(i in data){
-				if(! data.hasOwnProperty(i)){ continue; }
-				this.set(i, data[i]);
+				this.attributes[key] = value;
+			} else {
+				vars = key;
+				for(i in vars){
+					if(! vars.hasOwnProperty(i)){ continue; }
+					this.set(i, vars[i]);
+				}
 			}
 		},
 
 		/**
 		 * Get option by key (from named prop)
 		 * @param String key
-		 * @param String prop (optional)
 		 */
-		get : function(key, prop){
-			prop = prop || "options";
-			if(this[prop].hasOwnProperty(key)){
-				return this[prop][key];
+		get: function(key){
+			if(key instanceof String || typeof key === "string"){
+				return this.attributes[key];
 			}
+			return this.attributes;
 		}
 	};
 
@@ -69,15 +66,15 @@
 		 * - appname:String => Name of app object in global
 		 * - path:String => Path to main.js
 		 */
-		scripts : [],
-		appname : "app",
-		path : null,
+		scripts: [],
+		appname: "app",
+		path: null,
 
 		/**
 		 * Initialize
 		 * Get self node, get values from data-* attributes, then load main.js
 		 */
-		init : function(){
+		init: function(){
 			var self = this;
 			// attributes
 			this.node = this._getSelf();
@@ -99,7 +96,7 @@
 		 * Load resources
 		 * To be called as `head.require`
 		 */
-		require : function(/* file1, file2, file3 ... */){
+		require: function(/* file1, file2, file3 ... */){
 			var path, resources;
 			path = this.path;
 			resources = [];
@@ -112,7 +109,7 @@
 		/**
 		 * Get self node
 		 */
-		_getSelf : function(){
+		_getSelf: function(){
 			var nodes = doc.getElementsByTagName("script");
 			return nodes[nodes.length - 1];
 		},
@@ -122,7 +119,7 @@
 		 * @param String name
 		 * @return String
 		 */
-		_data : function(name){
+		_data: function(name){
 			return this.node.getAttribute("data-" + name);
 		},
 
@@ -131,7 +128,7 @@
 		 * @param String path
 		 * @return String
 		 */
-		_dirname : function(path){
+		_dirname: function(path){
 			return path.replace(/(#|\?).+$/g, "").replace(/[^\/]+$/, "");
 		},
 
@@ -140,7 +137,7 @@
 		 * @param Object|Array o
 		 * @param Function callback
 		 */
-		_each : function(o, callback){
+		_each: function(o, callback){
 			var i;
 			for(i in o){
 				if(! o.hasOwnProperty(i)){ continue; }

@@ -8,14 +8,14 @@
 @example 
 
 grunt.initConfig({
-	headRequire : {
-		dist : {
-			options : {
-				uglify : true, // uglify or not
-				banner : "", // comment banner string
-				head : "head" // name of `head` object
+	headRequire: {
+		dist: {
+			options: {
+				uglify: true, // uglify or not
+				banner: "", // comment banner string
+				head: "head" // name of `head` object
 			},
-			files : {
+			files: {
 				"the/path/to/dest.js" : "the/path/to/main.js"
 			}
 		}
@@ -30,15 +30,15 @@ module.exports = function(grunt){
 
  		var my = {
 
- 			uglify : require("uglify-js"),
- 			hrc : require("../lib/head-require"),
- 			options : this.options({
+ 			uglify: require("uglify-js"),
+ 			hrc: require("../lib/head-require"),
+ 			options: this.options({
  				uglify : false,
  				banner : "",
  				head : "head"
  			}),
 
- 			init : function(files){
+ 			init: function(files){
  				var banner;
 
  				my.hrc.config(my.options);

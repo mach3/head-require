@@ -1,2 +1,2 @@
-/* updated : 2013-07-04 */
-myapp.foo=new myapp.lib.Foo,myapp.bar=new myapp.lib.Bar,myapp.baz=new myapp.lib.Baz;var log=function(a){var p=document.getElementById("log");p.innerText+=a+"\n"};log("Foo: "+(myapp.foo instanceof myapp.lib.Foo).toString()),log("Bar: "+(myapp.bar instanceof myapp.lib.Bar).toString()),log("Baz: "+(myapp.baz instanceof myapp.lib.Baz).toString());
+/* updated : 2013-07-13 */
+myapp.foo=new myapp.lib.Foo,myapp.bar=new myapp.lib.Bar,myapp.baz=new myapp.lib.Baz,function(){var a,p;a=function(a){var p=document.getElementById("log");p.innerText+=a+"\n"},a("Foo: "+(myapp.foo instanceof myapp.lib.Foo).toString()),a("Bar: "+(myapp.bar instanceof myapp.lib.Bar).toString()),a("Baz: "+(myapp.baz instanceof myapp.lib.Baz).toString()),a("-----"),myapp.set("name","head-require"),myapp.set({from:"Feb 2013",require:"head.js <http://headjs.com>",author:"mach3 <http://github.com/mach3>"}),p=myapp.get();for(var o in p)p.hasOwnProperty(o)&&a(o+": "+p[o])}();

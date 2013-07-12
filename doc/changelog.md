@@ -1,6 +1,11 @@
 
 # ChangeLog
 
+## 1.4.1 (2013-07-13)
+
+- Update set(), get()
+- Reomve last argument `prop` from set() and get() (!!!)
+
 ## 1.4.0 (2013-07-05)
 
 - Remove `window.headRequire` method on browser (!!!)
