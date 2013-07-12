@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Head-require by mach3</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/mach3/head-require">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/mach3/head-require/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/mach3/head-require/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Head-require</h1>
+          <p>Extention for head.js to use resource loader like require.js</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/mach3">mach3</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a name="headrequirejs" class="anchor" href="#headrequirejs"><span class="octicon octicon-link"></span></a>HeadRequire.js</h1>
+
+<p>Extension for head.js to use resource loader like require.js</p>
+
+<h2>
+<a name="feature" class="anchor" href="#feature"><span class="octicon octicon-link"></span></a>Feature</h2>
+
+<ul>
+<li>Set main.js in script element's data-main attribute</li>
+<li>Multiple main.js available now</li>
+<li>Use <code>head.require()</code> to load resources</li>
+<li>Grunt task to compile them to a file</li>
+</ul><h2>
+<a name="basic-usage" class="anchor" href="#basic-usage"><span class="octicon octicon-link"></span></a>Basic Usage</h2>
+
+<h3>
+<a name="resource-loader" class="anchor" href="#resource-loader"><span class="octicon octicon-link"></span></a>Resource Loader</h3>
+
+<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"scripts/head.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"scripts/head-require.js"</span> <span class="na">data-main=</span><span class="s">"scripts/main.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+
+<p>"scripts/main.js" like this : </p>
+
+<div class="highlight"><pre><span class="nx">head</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span>
+    <span class="s2">"the/path/to/foojs"</span><span class="p">,</span>
+    <span class="s2">"the/path/to/bar.js"</span><span class="p">,</span>
+    <span class="s2">"the/path/to/baz.js"</span>
+    <span class="s2">"the/path/to/initialize.js"</span>
+<span class="p">);</span>
+</pre></div>
+
+<p>» <a href="http://github.com/mach3/head-require/doc/head-require.md">Learn more about head-require.js</a></p>
+
+<h3>
+<a name="grunt-task-to-compile" class="anchor" href="#grunt-task-to-compile"><span class="octicon octicon-link"></span></a>Grunt Task to Compile</h3>
+
+<p>Example :</p>
+
+<div class="highlight"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+    <span class="nx">headRequire</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="nx">dist</span> <span class="o">:</span> <span class="p">{</span>
+            <span class="nx">options</span> <span class="o">:</span> <span class="p">{},</span>
+            <span class="nx">files</span> <span class="o">:</span> <span class="p">{</span> <span class="s2">"the/path/to/dest.js"</span> <span class="o">:</span> <span class="s2">"the/path/to/main.js"</span> <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>» <a href="http://github.com/mach3/head-require/doc/grunt-task.md">Learn more about Grunt task</a></p>
+
+<h3>
+<a name="change-log" class="anchor" href="#change-log"><span class="octicon octicon-link"></span></a>CHANGE LOG</h3>
+
+<p>» <a href="http://github.com/mach3/head-require/doc/changelog.md">Change Log</a></p>
+
+<hr><h2>
+<a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>Author</h2>
+
+<p>mach3</p>
+
+<ul>
+<li><a href="http://www.mach3.jp">Website</a></li>
+<li><a href="http://blog.mach3.jp">Blog</a></li>
+<li><a href="http://twitter.com/mach3ss">Twitter</a></li>
+</ul>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
