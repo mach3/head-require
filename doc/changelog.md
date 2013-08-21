@@ -1,6 +1,10 @@
 
 # ChangeLog
 
+## 1.4.2 (2013-08-21)
+
+- Fix bug (can't use `for in arguments` on IE8)
+
 ## 1.4.1 (2013-07-13)
 
 - Update set(), get()

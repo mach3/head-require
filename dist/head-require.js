@@ -3,7 +3,7 @@
  * --------------
  * Copyright (C) 2013 Matsukaze.
  *
- * @version 1.4.1
+ * @version 1.4.2
  * @author mach3
  * @require head.js <http://headjs.com>
  *
@@ -107,13 +107,13 @@
 		 * To be called as `head.require`
 		 */
 		require: function(/* file1, file2, file3 ... */){
-			var path, resources;
-			path = this.path;
-			resources = [];
-			this._each(arguments, function(value, key){
-				resources[key] = path + value;
-			});
-			head.js.apply(head, resources);
+			var args, i, files;
+			args = arguments;
+			files = [];
+			for(i=0; i<args.length; i++){
+				files.push(this.path + args[i]);
+			}
+			head.js.apply(head, files);
 		},
 
 		/**
